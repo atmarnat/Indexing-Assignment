@@ -25,17 +25,24 @@ namespace KeyValueStore_EX1b
         {
             get
             {
-                //searches for the key, then returns the value if found
+                //Loops through the whole array
+                //if the KeyValue.Key is equal to the desired index
+                //then it will return the KeyValue.Value object that is paired with the Key
                 for (int i = 0; i < ar.Length; i++)
                 {
                     if (ar[i].Key == index)
                         return ar[i].Value;
                 }
+                //if the loop finishes, then a KeyValue string was not found equal to index
+                //so it throws an exception
                 throw new KeyNotFoundException(index);
             }
             set
             {
-                //checks for the key
+                //Loops through the whole array
+                //if the KeyValue.Key is equal to the index
+                //Then it will overwrite that spot in the array with a new KeyValue struct
+                //it will then jump out of 'set', as the rest is not needed 
                 for (int i = 0; i < ar.Length; i++)
                 {
                     if (ar[i].Key == index)
@@ -44,7 +51,15 @@ namespace KeyValueStore_EX1b
                         return;
                     }
                 }
-                //if the key is not found, checks for the first index
+                
+                //if we make it here, then the index was not found in the array for any KeyValue.Key
+                //There fore, the next step is to find an empty spot in the array to store a new KeyValue with the desired key, and the desired value
+                //So, loop through the whole array
+                
+                //If the KeyValue.Key is equal to null (this happened for all of the slots in the array when it was initialized)
+                //Then overwrite that index with a new KeyValue struct
+                //increment the count, so that we can keep track of how many different KeyValue structs are stored in the array
+                //then jump out of the set statement with the return.
                 for (int i = 0; i < ar.Length; i++)
                 {
                     if (ar[i].Key == null)
@@ -54,6 +69,8 @@ namespace KeyValueStore_EX1b
                         return;
                     }
                 }
+                //there is a bug in the code
+                //if you store 10 different KeyValues into the array, then you cannot store any more, as the loop will never find a KeyValue.Key equal to null if 10 already were set
             }
         }
     }
