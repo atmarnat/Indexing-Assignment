@@ -75,3 +75,59 @@ namespace KeyValueStore_EX1b
         }
     }
 }
+
+//This is a generic form of it. I switched the type of Value to be generic, so the type needs to be declared when it is called, rather than it just being an object.
+//This is just modified from the previous assignment.
+namespace KeyValueStore_EX2a
+{
+    public struct KeyValue<T>
+    {
+        public KeyValue(string key, T value)
+        {
+            this.Key = key;
+            this.Value = value;
+        }
+        public readonly string Key;
+        public readonly T Value;
+    }
+
+    public class MyDictionary<T>
+    {
+        int count = 0;
+
+        KeyValue<T>[] keyValueArray = new KeyValue<T>[10];
+
+        public T this[string index]
+        {
+            get
+            {
+                for (int i = 0; i < keyValueArray.Length; i++)
+                {
+                    if (keyValueArray[i].Key == index)
+                        return keyValueArray[i].Value;
+                }
+                throw new KeyNotFoundException(index);
+            }
+            set
+            {
+                for (int i = 0; i < keyValueArray.Length; i++)
+                {
+                    if (keyValueArray[i].Key == index)
+                    {
+                        keyValueArray[i] = new KeyValue<T>(index, value);
+                        return;
+                    }
+                }
+                for (int i = 0; i < keyValueArray.Length; i++)
+                {
+                    if (keyValueArray[i].Key == null)
+                    {
+                        keyValueArray[i] = new KeyValue<T>(index, value);
+                        count++;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+}

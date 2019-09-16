@@ -1,10 +1,10 @@
 ﻿using System;
-using KeyValueStore_EX1b;
+using KeyValueStore_EX2a;
 public class Program
 {
     static void Main()
     {
-        var d = new MyDictionary();
+        var d = new MyDictionary<object>();
         try
         {
             Console.WriteLine(d["Cats"]);
