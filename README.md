@@ -30,3 +30,5 @@ public class Program
     }
 }
 ````
+# EX 2A - C# - Generic Collections
+In a new project, modify your Key-Value store from last week to use a generic type parameter rather than typing your "value" instance field in `KeyValue` as an `object`.
